@@ -3,5 +3,9 @@ import 'package:doc_app/ui/splash_screen/bloc/state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
-  SplashScreenBloc() : super(const SplashScreenState().initial()) {}
+  SplashScreenBloc() : super(const SplashScreenState().initial()) {
+    on<CheckToken>(checkToken);
+  }
+
+  void checkToken(CheckToken event, Emitter emit) async {}
 }

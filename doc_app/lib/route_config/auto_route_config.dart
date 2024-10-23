@@ -6,5 +6,10 @@ class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(initial: true, page: SplashRoute.page),
+        CustomRoute(
+          page: AuthRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+          durationInMilliseconds: 400,
+        )
       ];
 }
