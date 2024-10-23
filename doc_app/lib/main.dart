@@ -1,4 +1,7 @@
+import 'package:doc_app/ui/splash_screen/bloc/bloc.dart';
+import 'package:doc_app/ui/splash_screen/bloc/state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +12,17 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+          body: BlocListener<SplashScreenBloc, SplashScreenState>(
+        listener: (context, state) {},
+        child: Builder(builder: (ctx) {
+          final character = ctx.select(
+            (SplashScreenState state) => state.character,
+          );
+          return Container();
+        }),
+      )),
     );
   }
 }
