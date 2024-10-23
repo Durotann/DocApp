@@ -15,6 +15,8 @@ class SplashScreenState extends Equatable {
     );
   }
 
+  SplashScreenState initial() => SplashScreenState();
+
   @override
   List<Object?> get props => [];
 }

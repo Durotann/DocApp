@@ -3,5 +3,5 @@ import 'package:doc_app/ui/splash_screen/bloc/state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
-  SplashScreenBloc(super.initialState) {}
+  SplashScreenBloc() : super(const SplashScreenState().initial()) {}
 }
