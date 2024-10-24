@@ -51,11 +51,11 @@ class CustomTextField extends StatelessWidget {
       onTap: onTap,
       style: !readOnly
           ? isValid
-              ? theme.textTheme.displaySmall?.copyWith(
+              ? theme.textTheme.displayMedium?.copyWith(
                   color: theme.colorScheme.onSurface,
                   fontWeight: fontWeight,
                 )
-              : theme.textTheme.displaySmall?.copyWith(
+              : theme.textTheme.displayMedium?.copyWith(
                   color: theme.colorScheme.onError,
                   fontWeight: fontWeight,
                 )
@@ -63,7 +63,7 @@ class CustomTextField extends StatelessWidget {
               color: const Color.fromRGBO(156, 163, 176, 1),
             ),
       decoration: InputDecoration(
-        hintStyle: theme.textTheme.displaySmall,
+        hintStyle: theme.textTheme.displayMedium,
         hintText: hintText,
         isDense: true,
         contentPadding: prefixIcon != null
