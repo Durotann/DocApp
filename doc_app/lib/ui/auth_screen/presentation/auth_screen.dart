@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:doc_app/route_config/auto_route_config.gr.dart';
 import 'package:doc_app/ui/theme/theme.dart';
 import 'package:doc_app/ui/theme/widgets/appbar_widget.dart';
 import 'package:doc_app/ui/theme/widgets/custom_button.dart';
@@ -95,30 +96,36 @@ _fields(BuildContext context) {
 }
 
 _button(BuildContext context) {
-  return Column(children: [
-    const SizedBox(height: 75),
-    CustomButton(
-      onPressed: () {},
-      title: "Sign up",
-      isActive: true,
-    ),
-    const SizedBox(
-      height: 15,
-    ),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "Don’t have an account? ",
-          style: theme.textTheme.bodySmall,
-        ),
-        Text(
-          "Sign In",
-          style: theme.textTheme.bodySmall?.copyWith(
-            color: theme.colorScheme.primary,
+  return Column(
+    children: [
+      const SizedBox(height: 75),
+      CustomButton(
+        onPressed: () {
+          context.router.push(
+            const HomeRoute(),
+          );
+        },
+        title: "Sign up",
+        isActive: true,
+      ),
+      const SizedBox(
+        height: 15,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Don’t have an account? ",
+            style: theme.textTheme.bodySmall,
           ),
-        ),
-      ],
-    )
-  ]);
+          Text(
+            "Sign In",
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: theme.colorScheme.primary,
+            ),
+          ),
+        ],
+      )
+    ],
+  );
 }
