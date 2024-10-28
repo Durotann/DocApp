@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:doc_app/route_config/auto_route_config.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 @RoutePage()
 class HomeScreen extends StatefulWidget {
@@ -20,10 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return AutoTabsRouter(
         routes: const [
           MainRoute(),
-          MainRoute(),
-          MainRoute(),
+          SearchRoute(),
+          NotificationRoute(),
+          ExtensionRoute(),
         ],
         builder: (context, child) {
+          final tabsRoute = AutoTabsRouter.of(context);
           return Scaffold(
             body: child,
             bottomNavigationBar: Container(
@@ -49,7 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   type: BottomNavigationBarType.fixed,
                   backgroundColor: Colors.white,
                   elevation: 1,
-                  onTap: changeTab,
+                  onTap: (value) {
+                    tabsRoute.setActiveIndex(value);
+                  },
                   selectedItemColor:
                       theme.bottomNavigationBarTheme.selectedItemColor,
                   currentIndex: currentIndex,
@@ -59,12 +62,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(top: 10.0),
                         child: ColorFiltered(
                           colorFilter: ColorFilter.mode(
-                            currentIndex == 0 ? Colors.blue : Colors.grey,
+                            tabsRoute.activeIndex == 0
+                                ? Colors.blue
+                                : Colors.black,
                             BlendMode.srcIn,
                           ),
                           child: Image.asset(
                             "images/home1.png",
-                            scale: 4,
+                            scale: 3,
                           ),
                         ),
                       ),
@@ -75,10 +80,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(top: 10.0),
                         child: ColorFiltered(
                           colorFilter: ColorFilter.mode(
-                            currentIndex == 1 ? Colors.blue : Colors.grey,
+                            tabsRoute.activeIndex == 1
+                                ? Colors.blue
+                                : Colors.black,
                             BlendMode.srcIn,
                           ),
-                          child: Image.asset('images/connect.png', scale: 4),
+                          child: Image.asset(
+                            'images/connect.png',
+                            scale: 3,
+                          ),
                         ),
                       ),
                       label: '',
@@ -88,11 +98,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(top: 10.0),
                         child: ColorFiltered(
                           colorFilter: ColorFilter.mode(
-                            currentIndex == 2 ? Colors.blue : Colors.grey,
+                            tabsRoute.activeIndex == 2
+                                ? Colors.blue
+                                : Colors.black,
                             BlendMode.srcIn,
                           ),
-                          child:
-                              Image.asset('images/notification.png', scale: 4),
+                          child: Image.asset(
+                            'images/notification.png',
+                            scale: 3,
+                          ),
                         ),
                       ),
                       label: '',
@@ -102,10 +116,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         padding: const EdgeInsets.only(top: 10.0),
                         child: ColorFiltered(
                           colorFilter: ColorFilter.mode(
-                            currentIndex == 3 ? Colors.blue : Colors.grey,
+                            tabsRoute.activeIndex == 3
+                                ? Colors.blue
+                                : Colors.black,
                             BlendMode.srcIn,
                           ),
-                          child: Image.asset('images/extension.png', scale: 4),
+                          child: Image.asset(
+                            'images/extension.png',
+                            scale: 3,
+                          ),
                         ),
                       ),
                       label: '',
@@ -116,26 +135,5 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         });
-  }
-
-  void changeTab(int index) {
-    setState(
-      () {
-        currentIndex = index;
-      },
-    );
-    switch (index) {
-      case 0:
-        // context.pushRoute('');
-        break;
-      case 1:
-        // context.goNamed('orders', pathParameters: {
-        //   "tabIndex": "new",
-        // });
-        break;
-      default:
-        // context.go('/profile');
-        break;
-    }
   }
 }
