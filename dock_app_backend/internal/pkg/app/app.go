@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"main/internal/app/endpoint"
+	"main/internal/app/repository/sqlx"
 	"main/internal/app/service"
 
 	"github.com/labstack/echo"
@@ -16,15 +17,18 @@ type App struct {
 }
 
 func New() (*App, error) {
-	a := &App{}
-
-	a.s = service.New()
+	a := &App{
+		echo: echo.New(),
+	}
+	db, err := sqlx.New(sqlx.LoadConfig())
+	if err != nil {
+		return nil, err
+	}
+	a.s = service.New(db)
 
 	a.e = endpoint.New(a.s)
 
-	a.echo.Use()
-
-	a.echo.GET("/auth", a.e.Authorization)
+	a.echo.POST("/auth", a.e.Authorization)
 
 	return a, nil
 }
