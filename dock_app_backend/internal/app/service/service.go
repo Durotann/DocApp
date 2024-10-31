@@ -17,6 +17,7 @@ func New(db repository.Repository) *Service {
 
 func (s *Service) SignIn(user models.User) error {
 	err := s.db.SignIn(user)
+
 	if err != nil {
 		return err
 	}

@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"main/internal/pkg/models"
 	"net/http"
+	"time"
 
+	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo"
 )
 
@@ -15,6 +17,8 @@ type Service interface {
 type Endpoint struct {
 	service Service
 }
+
+var secretKey = []byte("secret-key")
 
 func New(service Service) *Endpoint {
 	return &Endpoint{
@@ -38,12 +42,47 @@ func (e *Endpoint) Authorization(ctx echo.Context) error {
 	err = e.service.SignIn(user)
 	if err != nil {
 		fmt.Println("error")
-		return ctx.String(http.StatusInternalServerError, "Internal Server Error")
+		return ctx.JSON(http.StatusBadRequest, models.CustomError{
+			ErrorMessage: "A user with this email has already been created",
+		})
 	}
 
-	err1 := ctx.String(http.StatusOK, "Authorizated")
+	token, _ := createToken(user.Name)
+	err1 := ctx.JSON(http.StatusOK, map[string]interface{}{
+		"token": token,
+	})
 	if err1 != nil {
 		fmt.Println("error")
 	}
 	return nil
 }
+func createToken(username string) (string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256,
+		jwt.MapClaims{
+			"username": username,
+			"exp":      time.Now().Add(time.Hour * 24).Unix(),
+		})
+
+	tokenString, err := token.SignedString(secretKey)
+	if err != nil {
+		return "", err
+	}
+
+	return tokenString, nil
+}
+
+// func verifyToken(tokenString string) error {
+// 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+// 		return secretKey, nil
+// 	})
+
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	if !token.Valid {
+// 		return fmt.Errorf("недопустимый токен")
+// 	}
+
+// 	return nil
+// }

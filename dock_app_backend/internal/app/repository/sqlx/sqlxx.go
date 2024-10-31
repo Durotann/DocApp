@@ -1,12 +1,15 @@
 package sqlx
 
 import (
+	"database/sql"
 	"fmt"
+	"log"
 	"main/internal/pkg/models"
 	"time"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/jmoiron/sqlx"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // Config конфигурационные настройки БД
@@ -70,9 +73,22 @@ func New(cfg *Config) (db *DBrepo, myerr error) {
 }
 
 func (db *DBrepo) SignIn(user models.User) error {
+	existingUser, err := db.GetUserByEmail(user.Email)
+	if err != nil {
+
+		return err
+	}
+	if existingUser != nil {
+		return fmt.Errorf("user with email %s already exists", user.Email)
+	}
+	hashPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.MinCost)
+	if err != nil {
+		log.Println(err)
+	}
+	fmt.Printf("passwordHash: %v", hashPassword)
 	query := `INSERT INTO users (name, email, password) VALUES ($1, $2, $3)`
 
-	_, err := db.Exec(query, user.Name, user.Email, user.Password)
+	_, err = db.Exec(query, user.Name, user.Email, hashPassword)
 	if err != nil {
 		fmt.Printf("failed to insert User Data: %v", err)
 		return err
@@ -80,4 +96,20 @@ func (db *DBrepo) SignIn(user models.User) error {
 
 	return nil
 
+}
+
+func (db *DBrepo) GetUserByEmail(email string) (*models.User, error) {
+	query := `SELECT name, email, password FROM users WHERE email = $1`
+	row := db.QueryRow(query, email)
+
+	var user models.User
+	err := row.Scan(&user.Email)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return nil, nil
+		}
+		return nil, err
+	}
+
+	return &user, nil
 }
