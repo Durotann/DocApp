@@ -81,7 +81,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   _button() {
     return CustomButton(
       onPressed: () {
-        context.router.push(VerificationCodeRoute());
+        context.router.push(const VerificationCodeRoute());
       },
       title: 'Send Code',
       isActive: true,

@@ -39,5 +39,9 @@ final theme = ThemeData(
       fontSize: 16,
       fontWeight: FontWeight.w400,
     ),
+    displayLarge: TextStyle(
+      fontSize: 27,
+      fontWeight: FontWeight.w500,
+    ),
   ),
 );

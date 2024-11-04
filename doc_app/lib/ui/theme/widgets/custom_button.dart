@@ -85,9 +85,10 @@ class _CustomButtonState extends State<CustomButton> {
         return Text(
           widget.title,
           style: theme.textTheme.displayMedium!.copyWith(
-              color: widget.isActive
-                  ? Colors.white
-                  : const Color.fromRGBO(245, 248, 250, 1)),
+            color: widget.isActive
+                ? Colors.white
+                : const Color.fromRGBO(245, 248, 250, 1),
+          ),
         );
     }
   }
