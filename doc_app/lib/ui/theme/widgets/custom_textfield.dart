@@ -20,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     required this.isValid,
     this.maxLines = 1,
     this.fontWeight = FontWeight.w400,
+    this.suffix,
   });
   final TextEditingController controller;
   final List<TextInputFormatter>? inputFormatters;
@@ -36,6 +37,7 @@ class CustomTextField extends StatelessWidget {
   final bool isSearching;
   final int? maxLines;
   final FontWeight fontWeight;
+  final Widget? suffix;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -44,7 +46,7 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       onChanged: onChanged,
       validator: validator,
-      textAlignVertical: TextAlignVertical.center,
+      textAlignVertical: TextAlignVertical.top,
       readOnly: readOnly,
       maxLines: maxLines,
       focusNode: focusNode,
@@ -66,6 +68,7 @@ class CustomTextField extends StatelessWidget {
         hintStyle: theme.textTheme.displayMedium,
         hintText: hintText,
         isDense: true,
+        suffixIcon: suffix,
         contentPadding: prefixIcon != null
             ? const EdgeInsets.only(left: 0, right: 16, bottom: 16, top: 16)
             : const EdgeInsets.symmetric(horizontal: 16, vertical: 16),

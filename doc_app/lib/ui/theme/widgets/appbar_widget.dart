@@ -15,6 +15,7 @@ class AppbarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      scrolledUnderElevation: 0.0,
       backgroundColor: theme.scaffoldBackgroundColor,
       automaticallyImplyLeading: false,
       leadingWidth: 70,

@@ -43,5 +43,9 @@ final theme = ThemeData(
       fontSize: 27,
       fontWeight: FontWeight.w500,
     ),
+    displaySmall: TextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.w400,
+    ),
   ),
 );
