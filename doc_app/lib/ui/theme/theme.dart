@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const EdgeInsets horizontalPadding = EdgeInsets.symmetric(horizontal: 25);
+
 final theme = ThemeData(
   colorScheme: const ColorScheme(
     brightness: Brightness.light,
@@ -31,6 +33,10 @@ final theme = ThemeData(
     ),
     bodySmall: TextStyle(
       fontSize: 13,
+      fontWeight: FontWeight.w500,
+    ),
+    bodyMedium: TextStyle(
+      fontSize: 16,
       fontWeight: FontWeight.w400,
     ),
   ),

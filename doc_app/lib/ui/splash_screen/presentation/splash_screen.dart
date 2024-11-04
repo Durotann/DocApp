@@ -21,12 +21,16 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(const Duration(seconds: 1), () {
-      context.router.push(const AuthRoute());
-    });
+    Timer(
+      const Duration(seconds: 1),
+      () {
+        context.router.push(
+          AuthRoute(isSignUp: true),
+        );
+      },
+    );
 
     super.initState();
-    print("asdasdsa");
   }
 
   @override

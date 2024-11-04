@@ -13,6 +13,18 @@ class AppRouter extends RootStackRouter {
           page: AuthRoute.page,
           transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
+          children: [
+            CustomRoute(
+              page: ForgotPasswordRoute.page,
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              durationInMilliseconds: 400,
+            ),
+            CustomRoute(
+              page: VerificationCodeRoute.page,
+              transitionsBuilder: TransitionsBuilders.slideLeft,
+              durationInMilliseconds: 400,
+            ),
+          ],
         ),
         AutoRoute(
           page: HomeRoute.page,
