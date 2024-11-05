@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:doc_app/data/models/filtres_model/filtres_model.dart';
+import 'package:doc_app/ui/search_screen/widgets/body_bottom_sheet_widget.dart';
 import 'package:doc_app/ui/search_screen/widgets/doctor_card_widget.dart';
 import 'package:doc_app/ui/theme/theme.dart';
 import 'package:doc_app/ui/theme/widgets/appbar_widget.dart';
+import 'package:doc_app/ui/theme/widgets/custom_button.dart';
 import 'package:doc_app/ui/theme/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +37,7 @@ class _SearchScreenState extends State<SearchScreen> {
         preferredSize: Size.fromHeight(60),
         child: AppbarWidget(
           title: 'Search',
+          showBackButton: false,
         ),
       ),
       body: Padding(
@@ -55,17 +59,22 @@ class _SearchScreenState extends State<SearchScreen> {
 
   _searchField() {
     return CustomTextField(
-      suffix: Container(
-        margin: const EdgeInsets.all(10),
-        height: 32,
-        width: 32,
-        decoration: BoxDecoration(
-          color: Colors.blue,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Image.asset(
-          "images/settings.png",
-          color: Colors.white,
+      suffix: GestureDetector(
+        onTap: () {
+          _showModalBottomSheet();
+        },
+        child: Container(
+          margin: const EdgeInsets.all(10),
+          height: 32,
+          width: 32,
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Image.asset(
+            "images/settings.png",
+            color: Colors.white,
+          ),
         ),
       ),
       controller: searchController,
@@ -97,5 +106,99 @@ class _SearchScreenState extends State<SearchScreen> {
         },
       ),
     );
+  }
+
+  _showModalBottomSheet() {
+    return showModalBottomSheet<void>(
+        isScrollControlled: true,
+        context: context,
+        builder: (BuildContext context) {
+          return Container(
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(16)),
+            child: Padding(
+              padding: horizontalPadding.copyWith(bottom: 25, top: 25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  BodyBottomSheetWidget(
+                    filtres: [
+                      for (final item in [
+                        FiltresModel(name: "Dermatology", isSelected: true),
+                        FiltresModel(name: "Dermat", isSelected: true),
+                        FiltresModel(name: "Dermatology", isSelected: false),
+                        FiltresModel(name: "Dermatology", isSelected: false),
+                      ])
+                        FilterChip(
+                          showCheckmark: false,
+                          selectedColor: Colors.blue,
+                          label: Text(
+                            item.name,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color:
+                                  item.isSelected ? Colors.white : Colors.black,
+                            ),
+                          ),
+                          selected: item.isSelected,
+                          onSelected: (selected) {
+                            setState(() {
+                              if (selected) {
+                                item.isSelected = true;
+                              }
+                            });
+                          },
+                        )
+                    ],
+                    title: "Categories",
+                  ),
+                  const SizedBox(height: 25),
+                  BodyBottomSheetWidget(
+                    filtres: [
+                      for (final item in [
+                        FiltresModel(name: "Dermatology", isSelected: false),
+                        FiltresModel(name: "Dermat", isSelected: false),
+                        FiltresModel(name: "Dermatology", isSelected: false),
+                        FiltresModel(name: "Dermatology", isSelected: false),
+                      ])
+                        FilterChip(
+                          showCheckmark: false,
+                          label: Text(item.name),
+                          selected: item.isSelected,
+                          onSelected: (selected) {
+                            setState(() {
+                              if (selected) {
+                                item.isSelected = true;
+                              }
+                            });
+                          },
+                        )
+                    ],
+                    title: "Categories",
+                  ),
+                  const SizedBox(height: 40),
+                  CustomButton(
+                      onPressed: () {}, title: 'Apply Filters', isActive: true),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      height: 52,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Clear Filters",
+                          style: theme.textTheme.titleMedium,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

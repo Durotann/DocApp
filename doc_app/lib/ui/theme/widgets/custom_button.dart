@@ -16,6 +16,7 @@ class CustomButton extends StatefulWidget {
   final String title;
   final bool isActive;
   final bool? isLoading;
+
   @override
   State<CustomButton> createState() => _CustomButtonState();
 }

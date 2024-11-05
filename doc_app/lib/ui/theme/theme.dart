@@ -47,5 +47,9 @@ final theme = ThemeData(
       fontSize: 10,
       fontWeight: FontWeight.w400,
     ),
+    titleMedium: TextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w400,
+    ),
   ),
 );
