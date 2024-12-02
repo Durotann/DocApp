@@ -12,6 +12,7 @@ class AppbarWidget extends StatelessWidget {
   });
   final String title;
   final bool showBackButton;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -38,7 +39,9 @@ class AppbarWidget extends StatelessWidget {
               ),
             )
           : null,
-      title: Text(title),
+      title: Text(
+        title,
+      ),
     );
   }
 }

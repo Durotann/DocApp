@@ -29,6 +29,11 @@ class AppRouter extends RootStackRouter {
           transitionsBuilder: TransitionsBuilders.slideLeft,
           durationInMilliseconds: 400,
         ),
+        CustomRoute(
+          page: DoctorDetailRoute.page,
+          transitionsBuilder: TransitionsBuilders.slideLeft,
+          durationInMilliseconds: 400,
+        ),
         AutoRoute(
           page: HomeRoute.page,
           children: [

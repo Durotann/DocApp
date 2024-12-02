@@ -65,7 +65,7 @@ class CustomTextField extends StatelessWidget {
               color: const Color.fromRGBO(156, 163, 176, 1),
             ),
       decoration: InputDecoration(
-        hintStyle: theme.textTheme.displayMedium,
+        hintStyle: theme.textTheme.displayMedium?.copyWith(color: Colors.grey),
         hintText: hintText,
         isDense: true,
         suffixIcon: suffix,
@@ -78,7 +78,7 @@ class CustomTextField extends StatelessWidget {
           color: theme.colorScheme.onError,
         ),
         filled: true,
-        fillColor: isValid ? Colors.white : theme.colorScheme.error,
+        fillColor: isValid ? const Color(0xFFFFFFFF) : theme.colorScheme.error,
         border: !isSearching
             ? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(14),
@@ -129,7 +129,7 @@ class CustomTextField extends StatelessWidget {
                   top: 14,
                   left: 16,
                   right: 12,
-                  bottom: 14,
+                  bottom: 16,
                 ),
                 child: prefixIcon,
               )

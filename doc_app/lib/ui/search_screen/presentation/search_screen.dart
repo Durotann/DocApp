@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:doc_app/data/models/filtres_model/filtres_model.dart';
+import 'package:doc_app/route_config/auto_route_config.gr.dart';
 import 'package:doc_app/ui/search_screen/widgets/body_bottom_sheet_widget.dart';
 import 'package:doc_app/ui/search_screen/widgets/doctor_card_widget.dart';
 import 'package:doc_app/ui/theme/theme.dart';
@@ -7,6 +8,7 @@ import 'package:doc_app/ui/theme/widgets/appbar_widget.dart';
 import 'package:doc_app/ui/theme/widgets/custom_button.dart';
 import 'package:doc_app/ui/theme/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 @RoutePage()
 class SearchScreen extends StatefulWidget {
@@ -59,21 +61,24 @@ class _SearchScreenState extends State<SearchScreen> {
 
   _searchField() {
     return CustomTextField(
+      hintText: 'Search',
       suffix: GestureDetector(
         onTap: () {
           _showModalBottomSheet();
         },
         child: Container(
-          margin: const EdgeInsets.all(10),
-          height: 32,
-          width: 32,
+          margin: const EdgeInsets.all(5),
+          height: 38,
+          width: 38,
           decoration: BoxDecoration(
             color: Colors.blue,
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Image.asset(
-            "images/settings.png",
-            color: Colors.white,
+          child: SvgPicture.asset(
+            'images/settin.svg',
+            fit: BoxFit.scaleDown,
+            width: 15,
+            height: 15,
           ),
         ),
       ),
@@ -99,9 +104,14 @@ class _SearchScreenState extends State<SearchScreen> {
       child: ListView.builder(
         itemCount: 10,
         itemBuilder: (context, index) {
-          return const Padding(
-            padding: EdgeInsets.only(bottom: 13.0),
-            child: DoctorCardWidget(),
+          return GestureDetector(
+            onTap: () {
+              context.router.push(const DoctorDetailRoute());
+            },
+            child: const Padding(
+              padding: EdgeInsets.only(bottom: 13.0),
+              child: DoctorCardWidget(),
+            ),
           );
         },
       ),

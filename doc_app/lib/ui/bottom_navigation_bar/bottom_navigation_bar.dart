@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black38,
+                    color: Colors.black12,
                     spreadRadius: 0,
                     blurRadius: 10,
                   ),
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           child: Image.asset(
                             "images/home1.png",
-                            scale: 3,
+                            scale: 3.5,
                           ),
                         ),
                       ),

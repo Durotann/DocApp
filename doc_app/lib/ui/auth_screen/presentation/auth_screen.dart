@@ -48,7 +48,7 @@ class _AuthScreenState extends State<AuthScreen> {
       children: [
         const SizedBox(height: 50),
         Text(
-          widget.isSignUp ? 'Create\nAccount!' : "Welcome!",
+          widget.isSignUp ? 'Create Account!' : "Welcome!",
           style: theme.textTheme.headlineLarge,
         ),
       ],
@@ -58,7 +58,7 @@ class _AuthScreenState extends State<AuthScreen> {
   _fields() {
     return Column(
       children: [
-        SizedBox(height: widget.isSignUp ? 49 : 88),
+        SizedBox(height: 88),
         SizedBox(
           height: 52,
           child: CustomTextField(
@@ -98,21 +98,18 @@ class _AuthScreenState extends State<AuthScreen> {
               const SizedBox(height: 20),
             ],
           ),
-        SizedBox(
-          height: 52,
-          child: CustomTextField(
-            hintText: "Password",
-            controller: TextEditingController(),
-            inputFormatters: const [],
-            onChanged: (value) {},
-            prefixIcon: null,
-            keyboardType: TextInputType.text,
-            validator: (value) {
-              return null;
-            },
-            focusNode: null,
-            isValid: true,
-          ),
+        CustomTextField(
+          hintText: "Password",
+          controller: TextEditingController(),
+          inputFormatters: const [],
+          onChanged: (value) {},
+          prefixIcon: null,
+          keyboardType: TextInputType.text,
+          validator: (value) {
+            return null;
+          },
+          focusNode: null,
+          isValid: true,
         ),
         if (!widget.isSignUp)
           Column(
@@ -142,7 +139,7 @@ class _AuthScreenState extends State<AuthScreen> {
     return Column(
       children: [
         SizedBox(
-          height: widget.isSignUp ? 35 : 75,
+          height: widget.isSignUp ? 26 : 75,
         ),
         CustomButton(
           onPressed: () {
